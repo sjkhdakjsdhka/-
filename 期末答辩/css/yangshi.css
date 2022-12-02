@@ -1,0 +1,37 @@
+.button.gray{
+    z-index: 6;
+    position: relative;
+    top: 150px;
+    left: 250px;
+    width: 2cm;
+    height: 2cm;
+    border:1px solid #d2a000;
+    box-shadow: 0 1px 2px #fedd71 inset,0 -1px 0 #a38b39 inset,0 -2px 3px #fedd71 inset;
+    background: -webkit-linear-gradient(top,#fece34,#d8a605);
+    background: -moz-linear-gradient(top,#fece34,#d8a605);
+    background: linear-gradient(top,#fece34,#d8a605);
+    }
+    .tags:after{
+        font-weight: normal;
+        position: absolute;
+        display: inline-block;
+        content: "FREE";
+        top:-1px;
+        right: -30px;
+        color: #fff;
+        text-shadow:none;
+        width: 85px;
+        height:25px;
+        line-height: 28px;
+        -webkit-transform:rotate(45deg) scale(.7,.7);
+        -moz-transform:rotate(45deg) scale(.7,.7);
+        transform:rotate(45deg) scale(.7,.7);
+        }
+        .tags{
+            padding-right: 30px;
+            }
+            .gray.tags:after{
+                background: #d2a000;
+                border:1px solid #fcc100;
+                font-family: 'Times New Roman', Times, serif;
+                }

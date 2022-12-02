@@ -1,0 +1,119 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover,user-scalable=no">
+<title>结课作业</title>
+
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/wenjian.css">
+<link rel="stylesheet" type="text/css" href="css/yangshi.css ">
+
+</head>
+<body>
+
+	<div  class="home">
+		<!---->
+		<div class="banner">
+			<!---->
+			<div class="mask"></div>
+			<div class="bg">
+				<div  class="bg1" style="background-image:url(https://gd-hbimg.huaban.com/6e0944e58db9604392afbd8595e8fb733cdf619916f69-re2C1E_fw658);">
+				</div>
+				<div  class="bg2" style="background-image:url(https://gd-hbimg.huaban.com/6e0944e58db9604392afbd8595e8fb733cdf619916f69-re2C1E_fw658);">
+				</div>
+			</div>
+			<!---->
+			<div class="box">
+				<form class="fr" action="">
+					
+					<div class="fr__face" role="img" aria-label="Straight face">
+							<button type="button" class="button gray tags" style="font-family: --faceIndex" onclick="location.href='http://www.baidu.com'">限时免费下载源码</button></a>
+						<div class="fr__face-right-eye" data-right></div>
+						<div class="fr__face-left-eye" data-left></div>
+						<div class="fr__face-mouth-lower" data-mouth-lower></div>
+						<div class="fr__face-mouth-upper" data-mouth-upper></div>
+					</div>
+					<input class="fr__input" id="face-rating" type="range" value="2.5" min="0" max="5" step="0.1">
+				</form>
+							<div class="line"></div>
+						</span>
+						<div>
+
+						</div>
+					</button>
+				</div>
+			</div>
+			<!---->
+		</div>
+		<!---->
+	</div>
+	<script>
+		window.addEventListener("DOMContentLoaded",() => {
+			const fr = new FaceRating("#face-rating");
+		});
+		
+		class FaceRating {
+			constructor(qs) {
+				this.input = document.querySelector(qs);
+				this.input?.addEventListener("input",this.update.bind(this));
+				this.face = this.input?.previousElementSibling;
+				this.update();
+			}
+			update(e) {
+				let value = this.input.defaultValue;
+		
+				// when manually set
+				if (e) value = e.target?.value;
+				// when initiated
+				else this.input.value = value;
+		
+				const min = this.input.min || 0;
+				const max = this.input.max || 100;
+				const percentRaw = (value - min) / (max - min) * 100;
+				const percent = +percentRaw.toFixed(2);
+		
+				this.input?.style.setProperty("--percent",`${percent}%`);
+		
+				// face and range fill colors
+				const maxHue = 120;
+				const hueExtend = 30;
+				const hue = Math.round(maxHue * percent / 100);
+		
+				let hue2 = hue - hueExtend;
+				if (hue2 < 0) hue2 += 360;
+		
+				const hues = [hue,hue2];
+				hues.forEach((h,i) => {
+					this.face?.style.setProperty(`--face-hue${i + 1}`,h);
+				});
+		
+				this.input?.style.setProperty("--input-hue",hue);
+		
+				// emotions
+				const duration = 1;
+				const delay = -(duration * 0.99) * percent / 100;
+				const parts = ["right","left","mouth-lower","mouth-upper"];
+		
+				parts.forEach(p => {
+					const el = this.face?.querySelector(`[data-${p}]`);
+					el?.style.setProperty(`--delay-${p}`,`${delay}s`);
+				});
+		
+				// aria label
+				const faces = [
+					"Sad face",
+					"Slightly sad face",
+					"Straight face",
+					"Slightly happy face",
+					"Happy face"
+				];
+				let faceIndex = Math.floor(faces.length * percent / 100);
+				if (faceIndex === faces.length) --faceIndex;
+		
+				this.face?.setAttribute("aria-label",faces[faceIndex]);
+			}
+		}</script>
+		
+</body>
+</html>
